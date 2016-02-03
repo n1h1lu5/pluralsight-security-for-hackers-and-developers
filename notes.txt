@@ -1,0 +1,179 @@
+---------------------------
+Introduction
+---------------------------
+
+Understands the basics of software security
+
+This course is an overview
+	Defense: code auditing, fuzzing, 
+
+	Attack: reverse engineering, exploitation
+
+Why do bugs happen?
+	Coding mistakes
+	Imported bugs (libs)
+	Lack of clarity
+	Confusing API calls
+	Responsibility gaps (who's gonna do what in the team)
+	Failure to train coders on security issues
+	Design issues
+	Complex code
+	Not thinking about the future
+	Overly complex design or implementation
+
+Ongoing process considerations
+	Vulnerability fundamentals
+		Security policy
+			Safer APIs
+			Review procedures
+		Best pratices
+			pre-audited code patterns
+	Design/logic review
+		Trust
+		Algorithms
+		Storing data
+		Encryption
+	Operational review
+		Systems change
+			privileges and files
+			process creation
+	Static testing
+		Automation
+	Dynamic security testing
+		Fuzzing
+	Code review
+    Release review
+        Reverse engineering protection
+        What to do about exploits?
+            They will be found
+        Must be patchable
+            Obfuscation? A one day attack: there is a patch, but some customers didn't install it, so attackers can go and exploit that security flaw on customers that didn't update.
+            (zero day attack: no patches for that yet)
+
+--------------------------------------------------------
+Understanding the security development lifecycle - SDL
+--------------------------------------------------------
+
+Raising security IQ (of the organisation)
+    Security is everyone's job
+
+    Smart companies are doind:
+        Computer training (pluralsight)
+        In person training
+
+    Project based opportunities
+    CTF
+    Belt level
+
+    Accountability (evaluate effectiveness, review mistakes, how to do better?)
+
+SDL
+    Microsoft SDL
+    BSIMM
+    SAFECode.org
+
+Attack surface reduction
+    Do not over focus on testing
+        Talk about threat modeling, get dev, testers and operational folks together
+
+Threat modeling (UML for security ...)
+    Use a data flow diagram
+        So that you can find possible attack possibilities
+    Use threat modeling tool
+        Threat modeling tool of Microsoft
+
+Risk analysis
+    Depends of the level of risk (low, med, high)
+
+---------------------------
+Uncovering security bugs
+---------------------------
+
+Why do bugs manifest?
+    Many software issues result from improperly sanitized data
+    Memory corruption from bad parsing
+
+    Improperly cleansed or displayed user data
+        (tranform user input as html)
+
+Where do bugs hide?
+    You will need to take specific courses related to your programming language
+
+    The attack surface; point at which untrusted data enters and is processed
+        Minimize it!
+
+    Dark coners (or dead code: ex: code that process a request that is no longer sent by the client)
+
+    complex components
+
+How to find bugs?
+    Fuzzing
+    Automated static analysis
+    Manual analysis
+
+---------------------------
+Using Static analysis
+---------------------------
+
+Introduce automated code analysis
+    You do that with developement tools 
+    There are security tools (the good ones are commercial tools)
+
+    Pros:
+        run accros all code
+        extensible to find new bugs
+    Cons
+        false positives (report too much)
+        false negatives (will miss things)
+
+    Roll them out slowly and carefully (can be time expensive for a developer)
+
+Applying the static analysis review cycle
+    establish goals -> run tools -> review code -> make fixes -> repeat
+
+---------------------------------------------
+Pentesting code: learning from a case study
+---------------------------------------------
+
+Manual analysis
+    Manual code audit (need good expertise in security and in the targeted language)
+    Teamwork is prefered
+    Some compagines specialize in security code audit
+
+    process:
+        preassessment and goals -> app review -> documentation and analysis -> remediation support -> repeat
+
+Techniques
+    Purpose and security expectation
+        Attack surface focused
+
+    Top down techniques : read all the code
+
+    Bottom up: search for certain dangerous functions
+
+    Depends on the type of audit you do
+
+    other techniques:
+        - Line-by-lines
+        - Desk-checking
+        - Multiple passes
+
+Assets threats
+    OpenSSH
+    Threats?
+        (Rogue) Admin
+        Authenticated user
+        Unauthenticated user
+    Low-level implementation analysis
+        Integer errors
+        Buffer overflows
+        Format strings
+        Design issues for a double free?
+    High-level attack vectors
+        SSH protocol
+            sniffing
+            man in the middle
+        Login
+            brute forcing
+            multistage authentication
+            disable accounts
